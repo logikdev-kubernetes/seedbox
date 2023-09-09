@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: transmission
+spec:
+  selector:
+    matchLabels:
+      app: transmission 
+  serviceName: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: transmission
+        image: haugene/transmission-openvpn
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        ports:
+          - containerPort: 9091
+        volumeMounts:
+        - name: transmission
+          mountPath: /config
+        - name: nfs-medias
+          mountPath: /data
+        - name: nfs-medias
+          mountPath: /etc/openvpn/custom
+          subPath: configs
+        envFrom:
+        - configMapRef:
+           name: common-env
+        resources:
+          requests:
+            memory: 500Mi
+            cpu: 100m
+          limits:
+            memory: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: transmission
+    spec:
+      storageClassName: longhorn
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: nfs-medias
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-medias
+      resources:
+        requests:
+          storage: 1Gi
