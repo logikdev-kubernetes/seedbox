@@ -32,6 +32,8 @@ spec:
         envFrom:
         - configMapRef:
            name: common-env
+        - secretRef:
+           name: transmission
         resources:
           requests:
             memory: 500Mi
