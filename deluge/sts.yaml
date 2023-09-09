@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: deluge
+spec:
+  selector:
+    matchLabels:
+      app: deluge 
+  serviceName: deluge
+  template:
+    metadata:
+      labels:
+        app: deluge 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: deluge
+        image: binhex/arch-delugevpn
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
+        ports: 
+        - containerPort: 8112
+        - containerPort: 58846
+        - containerPort: 58946
+        - containerPort: 47594
+        volumeMounts:
+        - name: deluge
+          mountPath: /config
+        - name: nfs-medias
+          mountPath: /medias
+        - name: localtime
+          mountPath: /etc/localtime
+          readOnly: true
+        envFrom:
+        - configMapRef:
+           name: common-env
+        resources:
+          requests:
+            memory: 500Mi
+            cpu: 100m
+          limits:
+            memory: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: deluge
+    spec:
+      storageClassName: longhorn
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: nfs-medias
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: nfs-medias
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: localtime
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: manual
+      resources:
+        requests:
+          storage: 1Gi  

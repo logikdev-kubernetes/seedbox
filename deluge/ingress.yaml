@@ -1,0 +1,45 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+    name: deluge
+spec:
+    routes:
+        - kind: Rule
+          match: ENC[AES256_GCM,data:Hy3ElXkcKqS0iMbp5OIbKa9wc69GGh3gVXY=,iv:7YyKvdlOU6R8IKFojmh8LTVsiwsxVC6WF8wU4velNHc=,tag:1Lohkfi1CenYhpKnHaCn/w==,type:str]
+          middlewares: []
+          services:
+            - kind: Service
+              name: deluge
+              port: 80
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-09-09T14:33:51Z"
+    mac: ENC[AES256_GCM,data:uXYvLNNN7w86/EWyvoqtrQiNVvJzCDOXjN8mJVIuDpO4vKYL4g1/QtAf4ArNLF1u1mVjBB3+aamDIQVT29LDx0OKs7sIo2ERMlhknrq5sCT+S4va9zOwch0gOgKvqdMcKJzmL3N1ntKe3w6I/K5cRHj4F8S2/N64nPbt+YbRBmQ=,iv:QJHPMJR+5HTSezzNSCbVuh166TLxCJHMMQrsBpjaeTw=,tag:sIa1pbENHjEdLZd8d04H3Q==,type:str]
+    pgp:
+        - created_at: "2023-09-09T14:33:50Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyyGYy7YCFAQARAAod/1+ihX52O0o/D5Bu6QueyNy0+G0uuy/pb3rtLQWVVX
+            ql9OHkCrIHx8GaqD1NR86Whf3YJtwb/9Nc6TyEOjfF7bTR1o9Tre8JQTwm7aoOMY
+            MVZeiAtv5mskNBO5eImEcjq+XuCI5YdFClk3YCMPt4nmWazlFBhp0FwwzwB7sru+
+            Cs1DuXaLLV02F9LfGF7QfubzUlyywhz8a3e0tvDU2/ScizhuXKs9j69b1EtoP7AI
+            2q12gtsrHq6d16o2JPGPDT7GUFlD8+Z+u/ayw+dDiMblbFhzmvxL/nrI6wCt5e8U
+            6wOoXRiPTpb2ofoC3Rl+8dstbTsSOM8FjH0QUAHFbxRCohZ6TUHSANa4+AL224Rj
+            lf1gq9pvGFHWioD1rIJzPxoZop3YW/OJJv1wI7AZ79s2ZqFf6KdWJ/UG7IhCTRj+
+            9rGi9oIrBPYfgZH5AzfzreeCAIVxrCgO85umqHCDZPhNYciRkkpHX6fXXG1wmt/u
+            2WznYnnI1BpuIVOYy1X6pDbDuxZCz3NmnfexPtzJObTQJVKgSopDBEGm0KwZAFy8
+            YqB26BVPMcGXfsAZ6LltRQfZOG5oLmY58p8di083cn2QwwMvSoQZjFldbxT5/JQh
+            DGHmNizXBfwv0qxK/vaNYG5VrP1eD0F+8IWRXoVjtCCuUfz8Zu3OFsWCWw/WzPvU
+            aAEJAhCflur+8gdIrkO7uRkf56to2QUF3gpj5puXvT84rQdvOXIcVGhAA+SUiHmt
+            1kVR0iLxQVNL97Ql8q3oTjDFZKCPdof6BMDnIYPpRhUyEarWhuiso5ssqM6yzNzU
+            Ig0+k7T0qF1v
+            =NXzw
+            -----END PGP MESSAGE-----
+          fp: 75C3F62D6A9AA2165875F5C680A364E41D3C47AF
+    encrypted_regex: ^(match)$
+    version: 3.7.3

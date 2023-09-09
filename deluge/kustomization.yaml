@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: seedbox
+resources:
+  - ../common
+  - pv.yaml
+  - service.yaml
+  - ingress.yaml
+  - sts.yaml
+configMapGenerator:
+  - name: common-env
+    behavior: merge
+    envs:
+      - .env
+commonLabels:
+  app: deluge
+components:
+  - https://github.com/logikdev-kubernetes/kustomize-components/tree/main/authelia-middleware
