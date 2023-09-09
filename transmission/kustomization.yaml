@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: seedbox
 resources:
   - ../common
+  - secrets.yaml
   - service.yaml
   - ingress.yaml
   - sts.yaml
