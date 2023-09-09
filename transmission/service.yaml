@@ -6,7 +6,7 @@ spec:
   clusterIP: None
   ports:
     - port: 80
-      targetPort: 9191
+      targetPort: 9091
       name: http
   selector:
     app: transmission
