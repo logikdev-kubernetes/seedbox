@@ -21,6 +21,7 @@ spec:
             add: ["NET_ADMIN"]
         ports:
           - containerPort: 9091
+          - containerPort: 47594
         volumeMounts:
         - name: transmission
           mountPath: /config
