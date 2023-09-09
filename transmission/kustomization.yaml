@@ -14,4 +14,4 @@ configMapGenerator:
 commonLabels:
   app: transmission
 components:
-  - https://github.com/logikdev-kubernetes/kustomize-components/tree/main/authelia-middleware
+  - ../components/authelia-middleware
