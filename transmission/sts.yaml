@@ -53,7 +53,7 @@ spec:
   - metadata:
       name: nfs-medias
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadWriteMany" ]
       storageClassName: nfs-medias
       resources:
         requests:

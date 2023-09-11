@@ -1,25 +1,28 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: jellyfin
+  name: radarr
 spec:
   selector:
     matchLabels:
-      app: jellyfin
-  serviceName: jellyfin
+      app: radarr 
+  serviceName: radarr
   template:
+    metadata:
+      labels:
+        app: radarr 
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: jellyfin
-        image: lscr.io/linuxserver/jellyfin
+      - name: radarr
+        image: lscr.io/linuxserver/radarr
         ports:
-        - containerPort: 8096
+        - containerPort: 7878
           name: web
         volumeMounts:
-        - name: jellyfin
+        - name: radarr
           mountPath: /config
-        - name: jellyfin-medias
+        - name: nfs-medias
           mountPath: /medias
         envFrom:
         - configMapRef:
@@ -29,20 +32,20 @@ spec:
             memory: 100Mi
             cpu: 50m
           limits:
-            memory: 1Gi
+            memory: 500Mi
   volumeClaimTemplates:
   - metadata:
-      name: jellyfin
+      name: radarr
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 1Gi
+          storage: 1.5Gi
   - metadata:
-      name: jellyfin-medias
+      name: nfs-medias
     spec:
-      storageClassName: nfs-medias
       accessModes: [ "ReadWriteMany" ]
+      storageClassName: nfs-medias
       resources:
         requests:
           storage: 1Gi
