@@ -9,4 +9,4 @@ resources:
 commonLabels:
   app: lidarr
 components:
-  - ../components/authelia
+  - ../components/authelia-middleware
