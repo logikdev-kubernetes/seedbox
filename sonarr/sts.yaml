@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sonarr
+spec:
+  selector:
+    matchLabels:
+      app: sonarr 
+  serviceName: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr
+        ports:
+        - containerPort: 8989
+          name: web
+        volumeMounts:
+        - name: sonarr
+          mountPath: /config
+        - name: nfs-medias
+          mountPath: /medias
+        envFrom:
+        - configMapRef:
+           name: common-env
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 50m
+          limits:
+            memory: 500Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: sonarr
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1.5Gi
+  - metadata:
+      name: nfs-medias
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: nfs-medias
+      resources:
+        requests:
+          storage: 1Gi
