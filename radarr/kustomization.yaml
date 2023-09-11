@@ -9,4 +9,4 @@ resources:
 commonLabels:
   app: radarr
 components:
-  - ../components/authelia-middlewware
+  - ../components/authelia-middleware
