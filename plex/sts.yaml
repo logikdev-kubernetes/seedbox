@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: plex
+spec:
+  selector:
+    matchLabels:
+      app: plex 
+  serviceName: plex
+  template:
+    metadata:
+      labels:
+        app: plex 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: plex
+        image: lscr.io/linuxserver/plex
+        ports:
+        - containerPort: 32400
+          name: web
+        volumeMounts:
+        - name: plex
+          mountPath: /config
+        - name: nfs-medias
+          mountPath: /medias
+        envFrom:
+        - configMapRef:
+           name: common-env
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 100m
+          limits:
+            memory: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: plex
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: nfs-medias
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: nfs-medias
+      resources:
+        requests:
+          storage: 1Gi

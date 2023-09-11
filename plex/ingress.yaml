@@ -1,0 +1,44 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+    name: plex
+spec:
+    routes:
+        - kind: Rule
+          match: ENC[AES256_GCM,data:Q+hrOB4ORHnl2xof5RanMIYiiGUr9LuK,iv:BWw6U+489xmMcFSNmHEaoDIY9gZ+qxuv0yI7Xk5HwXc=,tag:d/61sXvUYC33K0Y7M5ltOg==,type:str]
+          services:
+            - kind: Service
+              name: plex
+              port: 80
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-09-11T05:52:16Z"
+    mac: ENC[AES256_GCM,data:D4WnjBTWqCUVNzSBkilzZDqn+ZuYQh8NMnXbvRVKH3B6b4I4wIoXNqlC8ITGL+PV2yPBGuhcOEOGKN7rmGl1oYGgWzOZEZgmlmdYep+08UViqIRI8ik3iuyO/yEM0pOk9O08UDcP/rKr2FgWE/MxAINYBGJA47LC64DRnLVR/rI=,iv:mkbE4VoJrLUWx2mN6Jt5I8cSwT/MNzdWooKtJnkRZMA=,tag:TxdnAqKm3/LwyNbILpPAMA==,type:str]
+    pgp:
+        - created_at: "2023-09-11T05:52:15Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyyGYy7YCFAQAQ//Tp9XNAdT0ftEnQQ2J7Anu5OhvAB8lKAXIv1CA365n3EN
+            eQRYabI1LZRqppvI0n3Q1mtSN2GpP/bxb42Y0/sk4h4PS53o4HQ2Pce1uY94sERa
+            wNQhyspckXD6mlMYCNvn8lwnY//9XbHBglYD7BAmcxgEp2A9dKp6j4ZrLFlTNUi3
+            7GFV+kekgTXbqsxN9eaQU98gMte0ZBo+wd4bddsVEHHZ2IqRgmgQF6oAEEravbNf
+            uv0NNFNxqZ7vM02n7e+oIRUhq2RFk7urGVL0fo5pz0wHu3r3C9UM292KFmzqhPKd
+            8NqmabXBa99g6HJV2ndvHcyvJDCqx2O3YWvCPLpYXiwlKukKsXD/TT/GmkOocKyZ
+            jUzBVQYv7Lte7QdbtymR5Bw0gEz11tApy1Ht1LT9FnyrwP4uGjmcociTYnu9SaS0
+            xtL2zbTZwMfxBUeaj3oPCAEJt0r+rfcc2nqFE/4VnGq3l+zDanvXdgiFU5OVKrhs
+            jM2PR42albUu/rVBjwoBDq/B+WsSIvRPa/zg30BvvhN/34FYd1yu0HAsUSWjrTaB
+            T9MtaQiJmPv4pkf7tkhlYhigEaGTfschT3IVlKFj9xB/eBq1UV4BVwA6S8Q3HGZ1
+            8XSJX3e728MyFkpS6C0X17zFx63ICz4YbvqBjLlO70i9qPRDZfpMAi53DrArKzvU
+            aAEJAhBb2osBjRphmiEQotAeBk7+HVltdTW4lRsmoTe0g2ysnujRmnE7x8fyBfBd
+            rTSkZ9HHSj3xttEuwsfa0qZKlEKLW49eAjPnZ4rquazUrVwn5gbnibmo/T4+4nvI
+            LKg3bQTtvZQi
+            =WZpe
+            -----END PGP MESSAGE-----
+          fp: 75C3F62D6A9AA2165875F5C680A364E41D3C47AF
+    encrypted_regex: ^(match)$
+    version: 3.7.3
