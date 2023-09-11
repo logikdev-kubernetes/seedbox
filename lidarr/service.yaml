@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lidarr
+spec:
+  clusterIP: None
+  ports:
+    - port: 80
+      targetPort: 8686
+      name: http
