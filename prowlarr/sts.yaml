@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: prowlarr
+spec:
+  selector:
+    matchLabels:
+      app: prowlarr 
+  serviceName: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: prowlarr
+        image: lscr.io/linuxserver/prowlarr
+        ports:
+        - containerPort: 9696
+          name: web
+        volumeMounts:
+        - name: prowlarr
+          mountPath: /config
+        envFrom:
+        - configMapRef:
+           name: common-env
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 50m
+          limits:
+            memory: 500Mi
+  volumeClaimTemplates:
+  - metadata:
+      name: prowlarr
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 2Gi
