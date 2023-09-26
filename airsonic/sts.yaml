@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: airsonic
+spec:
+  selector:
+    matchLabels:
+      app: airsonic 
+  serviceName: airsonic
+  template:
+    metadata:
+      labels:
+        app: airsonic 
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: airsonic
+        image: lscr.io/linuxserver/airsonic-advanced
+        ports:
+        - containerPort: 4040
+          name: web
+        volumeMounts:
+        - name: airsonic
+          mountPath: /config
+        - name: nfs-medias
+          mountPath: /medias
+        envFrom:
+        - configMapRef:
+           name: common-env
+        - secretRef:
+           name: airsonic-secrets
+        resources:
+          requests:
+            memory: 100Mi
+            cpu: 50m
+          limits:
+            memory: 1Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: airsonic
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 1Gi
+  - metadata:
+      name: nfs-medias
+    spec:
+      accessModes: [ "ReadWriteMany" ]
+      storageClassName: nfs-medias
+      resources:
+        requests:
+          storage: 1Gi
