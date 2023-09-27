@@ -26,7 +26,8 @@ spec:
         - name: transmission
           mountPath: /config
         - name: nfs-medias
-          mountPath: /medias
+          mountPath: /data
+          subPath: downloads
         - name: nfs-medias
           mountPath: /etc/openvpn/custom
           subPath: configs
