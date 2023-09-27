@@ -23,7 +23,7 @@ spec:
         - name: radarr
           mountPath: /config
         - name: nfs-medias
-          mountPath: /medias
+          mountPath: /data
         envFrom:
         - configMapRef:
            name: common-env
