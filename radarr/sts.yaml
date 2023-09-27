@@ -24,10 +24,10 @@ spec:
           mountPath: /config
         - name: nfs-medias
           mountPath: /movies
-          subPath: /movies
+          subPath: movies
         - name: nfs-medias
           mountPath: /data
-          subPath: /downloads
+          subPath: downloads
         envFrom:
         - configMapRef:
            name: common-env
