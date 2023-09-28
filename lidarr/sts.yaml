@@ -23,7 +23,11 @@ spec:
         - name: lidarr
           mountPath: /config
         - name: nfs-medias
-          mountPath: /medias
+          mountPath: /data
+          subPath: downloads
+        - name: nfs-medias
+          mountPath: /music
+          subPath: music
         envFrom:
         - configMapRef:
            name: common-env
