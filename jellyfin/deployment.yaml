@@ -1,15 +1,16 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: jellyfin
 spec:
   selector:
     matchLabels:
       app: jellyfin
-  serviceName: jellyfin
   template:
+    metadata:
+      labels:
+        app: jellyfin
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: jellyfin
         image: lscr.io/linuxserver/jellyfin
@@ -20,7 +21,7 @@ spec:
         - name: jellyfin
           mountPath: /config
         - name: jellyfin-medias
-          mountPath: /medias
+          mountPath: /data
         envFrom:
         - configMapRef:
            name: common-env
@@ -30,19 +31,13 @@ spec:
             cpu: 50m
           limits:
             memory: 1Gi
-  volumeClaimTemplates:
-  - metadata:
-      name: jellyfin
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 1Gi
-  - metadata:
-      name: jellyfin-medias
-    spec:
-      storageClassName: nfs-medias
-      accessModes: [ "ReadWriteMany" ]
-      resources:
-        requests:
-          storage: 1Gi
+            cpu: 800m  
+      volumes:
+        - name: medias
+          hostPath: 
+            path: /mnt/storage/medias
+            readOnly: true
+        - name: config   
+          hostPath: 
+            path: /home/logikdev/configs/jellyfin
+ 
