@@ -18,7 +18,7 @@ spec:
         - containerPort: 8096
           name: web
         volumeMounts:
-        - name: jellyfin
+        - name: config
           mountPath: /config
         - name: medias
           mountPath: /data
