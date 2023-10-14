@@ -20,7 +20,7 @@ spec:
         volumeMounts:
         - name: jellyfin
           mountPath: /config
-        - name: jellyfin-medias
+        - name: medias
           mountPath: /data
         envFrom:
         - configMapRef:
