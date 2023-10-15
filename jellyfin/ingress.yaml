@@ -11,6 +11,8 @@ spec:
             - kind: Service
               name: jellyfin
               port: 80
+    tls:
+      secretName: letsencrypt-production
 sops:
     kms: []
     gcp_kms: []
