@@ -1,0 +1,43 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+    name: letsencrypt-tls
+spec:
+    secretName: letsencrypt-tls
+    dnsNames:
+        - ENC[AES256_GCM,data:tTqlVhyF1VkxddtU7g==,iv:U3JNgGpH4+xB5MaUtoG0HcpU0RKauAS/sTM6jB9AE78=,tag:bcieLo4fr0k1jEl6FpzTOg==,type:str]
+    issuerRef:
+        name: letsencrypt-production
+        kind: ClusterIssuer
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-10-15T08:51:25Z"
+    mac: ENC[AES256_GCM,data:TCeXcEusEYuVDtSWqcHsz529HlOQYIuJpZwJjTlcFBp+/kz+jZVvGUs2nmZw/qEjXqRd1Ne0mVFQC3GAlLeOeZydKVeD9d7zQ6IdgtyejHVUm/UuTmK1CObkaXiJTTZQl5AF+sIFWkpAXhKSDaFG4+hguAHy7NMJD8vUI2p+FA0=,iv:PzsRJGt1f5w8MJ5TYiVDZPXDfseDF/AxL7GYX/XtLVI=,tag:M6VF4TroJVlcWvF8rotUTQ==,type:str]
+    pgp:
+        - created_at: "2023-10-15T08:51:24Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyyGYy7YCFAQAQ//cNj645cdhwqw1gmyEzRQS+mOwmSGZwpFtLak5W50emzT
+            Ffm8fL6m3VZRSIZEFuV4npetq9ZBTPyHP+wkxqWglv7IBBSFf7zU3Ec/bzf+P3eW
+            AaDbpMHtwYWaqZzYNIjFzv/Q6wpIPO5ZsiClKD5Rvn19b6DgRop3DACjeoMBgI12
+            y/iBCwx48nSUUhRlsd94vDs5XTMx0UT2sLxO811KxRoed0KcZWyu+0ixgTcMCsMl
+            /WNDCyiplZWOka4nE6seUb4j7JyZ7n9m86ayb70CR9DuailZwriezNhX6jffIfYT
+            CmIQ1F3D254T8aHSwja7EwoROOdp4G+61u1s4RBD/Iz/iDnNnTPCNvcCnGcaT9vz
+            PX9xYew4INVYe84aNa3npyesNLnv5nHjZ6WbZKZLqCb5tizitZG9y0/m3NsT2/Dz
+            xYQvB0CrOpnRKj6HKwHzix790teMa53ZSwo2tMbROuPJb13bM9GkZMUpClBy/7tA
+            Xlp7qYnpabP66EXbCQj0IxF8apkH+qi5jUdc+RkcVx1RWoAemYeeZdTaGEDcw9/L
+            13t6EidrEc2R31+Y415jsSscx1pAd9eZ7jGvl4qshlweM1Rkhyd7bbHKTVZ+Amej
+            SivcvbaT7NyrFBZCMgezoudOQpdRAjohD3Tqszvn5srVADgX2AiSpw6eH8uCh0fU
+            aAEJAhAxkp+OoX+g0RkfQYWoS+CXZgk79PEW4QPnPWdb+t+vdxc1ELUzS1Z3HHnY
+            v99nRhi1YM6n88Xt9rLmz3T8hVy1xD0ekR9tf60MVvSLo64ni0mPqTqBdN2fnUEz
+            EfjuBCm4i7Vs
+            =t5ll
+            -----END PGP MESSAGE-----
+          fp: 75C3F62D6A9AA2165875F5C680A364E41D3C47AF
+    encrypted_regex: ^(dnsNames)$
+    version: 3.7.3
