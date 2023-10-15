@@ -12,7 +12,7 @@ spec:
               name: jellyfin
               port: 80
     tls:
-      secretName: letsencrypt-production
+      secretName: letsencrypt-tls
 sops:
     kms: []
     gcp_kms: []
